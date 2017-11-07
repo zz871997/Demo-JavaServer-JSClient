@@ -1,0 +1,110 @@
+body {
+    background-color: gray;
+}
+
+h2 , h1{
+    color: white;
+    padding-top: 30px;
+}
+
+#wrapper {
+    margin: auto;
+}
+
+#loginForm {
+    text-align: center;
+    background-color: black;
+    margin: auto;
+}
+
+#txtUsername {
+    border-radius: 18px;
+    border: solid 3px #283aff;
+    font-size: 24px;
+    padding-left: 10px;
+    padding-bottom: 4px;
+    padding-right: 10px;
+    padding-top: 4px;
+    margin: 4px;
+}
+
+#txtPassword {
+    border-radius: 18px;
+    border: solid 3px #283aff;
+    font-size: 24px;
+    padding-left: 10px;
+    padding-bottom: 4px;
+    padding-right: 10px;
+    padding-top: 4px;
+    margin: 4px;
+}
+
+#btnLogin {
+    border-radius: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    color: black;
+    border: solid 3px #283aff;
+    padding-left: 34px;
+    padding-right: 34px;
+    margin-top: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-bottom: 40px;
+}
+
+#btnLogin:hover {
+    font-size: 26px;
+    padding-left: 38px;
+    padding-right: 38px;
+    color: white;
+    background-color: #6477ff;
+    cursor: pointer;
+}
+
+#left {
+    width: 30%;
+    float: left;
+    //background-color: yellow;
+}
+
+#right {
+    width: 70%;
+    float: right;
+    background-color: blue;
+}
+
+#boxTitle {
+    background-color: #283aff;
+    font-size: 34px;
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#users {
+    height: 340px;
+    border: solid 2px #283aff;
+    text-decoration: none;
+    overflow-y: auto;
+    margin-bottom: 30px;
+}
+
+.listUsers{
+    list-style-type: none;
+
+    text-align: center;
+    padding: 6px;
+}
+
+.user {
+    text-align: center;
+    background-color: white;
+    border: solid 2px blue;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 4px;
+    font-size: 22px;
+    font-weight: bold;
+}

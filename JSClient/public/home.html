@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Chat</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Login FORM -->
+        <div id="loginForm">
+            <h1>Welcome to Chat Room - Project NMCNPM 20171</h1>
+            <h2>What is your account?</h2>
+            <input type="text" id="txtUsername" placeholder="Username"> <br>
+            <input type="password" id="txtPassword" placeholder="Password"> <br>
+            <input type="button" value="Login" id="btnLogin">
+        </div>
+
+        <!-- Chat FORM -->
+        <div id="chatForm">
+            <div id="left">
+                <div id="boxTitle"> <b>Users Online</b></div>
+                <div id="users">
+                    <ul class="listUsers">
+                        <li class="user">Tran Quang Khai</li>
+                        <li class="user">Mai Tien Dung</li>
+                        <li class="user">Tran Quang Khai</li>
+                        <li class="user">Mai Tien Dung</li>
+                        <li class="user">Tran Quang Khai</li>
+                        <li class="user">Mai Tien Dung</li>
+                        <li class="user">Tran Quang Khai</li>
+                        <li class="user">Mai Tien Dung</li>
+                        <li class="user">Tran Quang Khai</li>
+                        <li class="user">Mai Tien Dung</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div id="right">
+                <!-- Hello current user -->
+                <div id="sayHi">
+                    Hello <span id="currentUser">Khai</span>
+                    <input type="button" id="btnLogout" value="Logout">
+                </div>
+
+                <!-- List message -->
+                <div id="listMessages">
+
+
+                </div>
+
+                <!-- Input Area -->
+                <input type="text" id="txtMessages" maxlength="120">
+                <input type="button" id="btnSend" value="SEND">
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+</body>
+</html>
