@@ -1,78 +1,33 @@
 package tranquangkhai.server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.ServerSocket;
-import java.net.Socket;
+import com.corundumstudio.socketio.listener.*;
+import com.corundumstudio.socketio.*;
+
 
 public class MyServer {
-	public MyServer(){
+	public static void main(String[] args) throws InterruptedException {
+		Configuration config = new Configuration();
+		config.setHostname("localhost");
+		config.setPort(9092);
 		
-	}
-	
-	public static void main(String[] args) {
-		ServerSocket serverSocket = null;
-		Socket socket = null;
-		BufferedReader dataInputStream = null;
+		final SocketIOServer server = new SocketIOServer(config);
 		
-		try {
-			serverSocket = new ServerSocket(8888);
-			System.out.println("Listening...");
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			socket = serverSocket.accept();
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("can't listen given port \n");
-	        System.exit(-1);
-		}
-		
-		try {
-			dataInputStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			System.out.println("ip: " + socket.getInetAddress());
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("can't read File \n");
-            System.exit(-1);
-		}
-		
-			try {
-				StringBuilder sb = new StringBuilder();
-				String line = null;
-				while ((line = dataInputStream.readLine()) != null) {
-					sb.append(line + "\n");
-				}
-				dataInputStream.close();
-				System.out.println("Message: " + sb.toString());
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-				System.out.println("Cant read file \n");
+		/* Chat event - Server listens 'chatevent' from client then send to all client */
+		server.addEventListener("chatevent", ChatObject.class, new DataListener<ChatObject>() {
+
+			@Override
+			public void onData(SocketIOClient client, ChatObject data, AckRequest ackRequest) throws Exception {
+				// Broadcast messages to all clients
+				server.getBroadcastOperations().sendEvent("chatevent", data);
 			}
-			finally {
-				if (socket != null) {
-					try {
-						socket.close();
-					} 
-					catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-				if (dataInputStream != null) {
-					try {
-						dataInputStream.close();
-					} 
-					catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			}
+		});
+		
+		/* Start server */
+		server.start();
+		
+		Thread.sleep(Integer.MAX_VALUE);
+		
+		server.stop();
+
 	}
 }

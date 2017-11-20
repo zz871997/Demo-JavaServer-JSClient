@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Chat</title>
+    <link href="bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="styleDemo.css" type="text/css">
+    <script src="js/socket.io/socket.io.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <!--<script src="mainChat.js"></script>-->
+    <script>
+        var socket   = io.connect('http://localhost:9092');
+        var userName = 'user' + Math.floor((Math.random()*1000) + 1);
+
+        /* Listen Event Connect */
+        socket.on('connect', function () {
+            output('<span class="connect-msg">Client has connected to the java server </span>');
+        });
+
+        /* Listen Chat event */
+        socket.on('chatevent', function (data) {
+            output('<span class="username-msg">' + data.userName + ':</span>' + data.message);
+        });
+
+        /* Listen Disconnect Event */
+        socket.on('disconnect', function () {
+            output('<span class="disconnect-msg"> The Client has disconnect! </span>');
+        });
+
+        /* Now, There are functions - That client send to server */
+        /* Send Disconnect */
+        function sendDisconnect() {
+            socket.disconnect();
+        }
+        /* Send message */
+        function sendMessage() {
+            var message = $('#msg').val();
+            $('#msg').val('');
+
+            var jsonObject = {userName: userName, message: message};
+            /* Now, server will emit chat event to server - send json to server */
+            socket.emit('chatevent', jsonObject);
+        }
+
+        /* Output */
+        function output(message) {
+            var currentTime = "<span class='time'>" + moment().format("HH:mm:ss.SSS")
+                + "</span>";
+            var element     = $("<div>" + currentTime + " " + message + "</div>");
+            $('#console').append(element);
+        }
+
+        /* Enter is press */
+        $(document).keydown(function(e){
+            if(e.keyCode == 13) {
+                $('#send').click();
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>Chat SocketIO with Java Server - Project NMCNPM 20171</h1> <br>
+
+    <div id="console" class="well">
+
+    </div>
+
+    <form class="well form-inline" onsubmit="return false;">
+        <input id="msg" class="input-xlarge" type="text" placeholder="Type something...">
+        <button type="button" onclick="sendMessage()" class="btn" id="send">SEND</button>
+        <button type="button" onclick="sendDisconnect()" class="btn">Disconnect</button>
+    </form>
+
+</body>
+</html>
